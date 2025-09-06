@@ -16,11 +16,12 @@ struct ApexPredator: Decodable, Identifiable {
     let longitude: Double
     let movies: [String]
     let movieScenes: [MovieScene]
+    let link: String
     var image: String {
         
         return self.name.lowercased().replacingOccurrences(of: " ", with: "")
     }
-    struct MovieScene: Decodable {
+    struct MovieScene: Decodable, Identifiable {
         let id: Int
         let movie: String
         let sceneDescription: String

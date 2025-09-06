@@ -26,6 +26,32 @@ struct PredatorDetail: View {
                         .offset(y: 20)
                     
                 }
+                VStack (alignment: .leading) {
+                    Text(predator.name.capitalized)
+                        .font(.largeTitle)
+                    Text("Appears in:").font(.title3)
+                    ForEach(predator.movies, id: \.self){ movie in
+                        Text("‧" + movie)
+                    }
+                    Text("Movie Moment").font(.title).padding(.top, 15)
+                    ForEach(predator.movieScenes){ movieScene in
+                        Text(movieScene.movie)
+                            .font(.title2)
+                            .padding(.vertical)
+                        Text(movieScene.sceneDescription)
+                            .padding(.bottom, 20)
+                    }
+                    Text("Read More:")
+                        .font(.caption)
+                    Link(predator.link, destination: URL(string: predator.link)!)
+                        .font(.caption)
+                }
+                .padding()
+                .padding(.bottom)
+                .frame(width: geo.size.width, alignment: .leading)
+               
+                
+                    
             }
         }.ignoresSafeArea()
     }

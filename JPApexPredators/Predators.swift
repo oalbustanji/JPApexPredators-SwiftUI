@@ -8,8 +8,8 @@
 import Foundation
 
 class Predators {
+    var allPredatorsList: [ApexPredator] = []
     var predatorsList: [ApexPredator] = []
-    
     init() {
         convert()
     }
@@ -20,7 +20,8 @@ class Predators {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let decodedData = try decoder.decode([ApexPredator].self, from: data)
-                predatorsList = decodedData
+                allPredatorsList = decodedData
+                predatorsList = allPredatorsList
             } catch {
                 print(error.localizedDescription)
             }
@@ -44,15 +45,13 @@ class Predators {
              }
         }
     }
-    func filter(by type: ApexType) -> [ApexPredator] {
+    func filter(by type: ApexType){
         if type != .all{
-            
-           return  predatorsList.filter { predator in
+            predatorsList = allPredatorsList.filter { predator in
                 predator.type == type
             }
-            
         }else {
-            return predatorsList
+            predatorsList = allPredatorsList
         }
     }
 }

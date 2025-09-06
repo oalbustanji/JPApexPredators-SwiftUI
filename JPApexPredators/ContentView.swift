@@ -15,12 +15,11 @@ struct ContentView: View {
     @State var currentSelection = ApexType.all
     
     var searchDinasors: [ApexPredator] {
+        predators.filter(by: currentSelection)
         predators.sort(by: alphabetical)
         return predators.search(searchText: searchText)
     }
-    var filterDinasors: [ApexPredator] {
-        return predators.filter(by: currentSelection)
-    }
+    
     var body: some View {
         NavigationStack{
             List(searchDinasors) { predator in
@@ -65,7 +64,7 @@ struct ContentView: View {
                     Menu{
                         Picker(
                             "Filter",
-                            selection: $currentSelection) {
+                            selection: $currentSelection.animation()) {
                                 ForEach(ApexType.allCases) { type in
                                     Label(
                                         type.rawValue.capitalized,

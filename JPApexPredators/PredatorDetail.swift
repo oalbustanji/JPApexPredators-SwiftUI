@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct PredatorDetail: View {
     
@@ -17,6 +18,17 @@ struct PredatorDetail: View {
                 ZStack (alignment: .bottomTrailing) {
                     Image(predator.type.rawValue)
                         .resizable().scaledToFit()
+                        .overlay {
+                            LinearGradient(
+                                stops: [
+                                    Gradient.Stop(color: .clear, location: 0.9),
+                                    Gradient.Stop(color: .black, location: 1)
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        }
+
                     Image(predator.name.lowercased())
                         .resizable()
                         .scaledToFit()
@@ -24,11 +36,15 @@ struct PredatorDetail: View {
                         .scaleEffect(x: -1)
                         .shadow(color: .black , radius: 7)
                         .offset(y: 20)
-                    
                 }
                 VStack (alignment: .leading) {
                     Text(predator.name.capitalized)
                         .font(.largeTitle)
+                    Map{
+                        
+                    }.frame(height: 150)
+                        .cornerRadius(15)
+                    
                     Text("Appears in:").font(.title3)
                     ForEach(predator.movies, id: \.self){ movie in
                         Text("‧" + movie)
@@ -49,11 +65,13 @@ struct PredatorDetail: View {
                 .padding()
                 .padding(.bottom)
                 .frame(width: geo.size.width, alignment: .leading)
-               
                 
-                    
+                
+                
             }
-        }.ignoresSafeArea()
+        }
+        .ignoresSafeArea()
+        .preferredColorScheme(.dark)
     }
 }
 

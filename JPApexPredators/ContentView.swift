@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
     let predators = Predators()
@@ -24,7 +25,16 @@ struct ContentView: View {
         NavigationStack{
             List(searchDinasors) { predator in
                 NavigationLink {
-                    PredatorDetail(predator: predator)
+                    PredatorDetail(
+                        predator: predator,
+                        position:
+                                .camera(
+                                    MapCamera(
+                                        centerCoordinate: predator.location,
+                                        distance: 3000
+                                    )
+                                )
+                    )
                 }label: {
                     HStack {
                         Image(predator.image)

@@ -5,8 +5,8 @@
 //  Created by Omar Bustanji on 03/09/2025.
 //
 
-import Foundation
 import SwiftUI
+import MapKit
 
 struct ApexPredator: Decodable, Identifiable {
     let id: Int
@@ -20,6 +20,12 @@ struct ApexPredator: Decodable, Identifiable {
     var image: String {
         
         return self.name.lowercased().replacingOccurrences(of: " ", with: "")
+    }
+    var location: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(
+            latitude: self.latitude,
+            longitude: self.longitude
+        )
     }
     struct MovieScene: Decodable, Identifiable {
         let id: Int

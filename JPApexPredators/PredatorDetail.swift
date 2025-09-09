@@ -68,7 +68,7 @@ struct PredatorDetail: View {
                                 .padding([.leading, .bottom], 5)
                                 .padding(.trailing, 8)
                                 .background(.black.opacity(0.33))
-                                .clipShape(.rect(bottomtrailingRadius: 15))
+                                .clipShape(.rect(bottomTrailingRadius: 15))
                         }
                         .clipShape(.rect(cornerRadius: 15))
                         

@@ -42,7 +42,15 @@ struct PredatorDetail: View {
                     Text(predator.name.capitalized)
                         .font(.largeTitle)
                     NavigationLink {
-                        Image(predator.image)
+                        PredatorMap(
+                            position:
+                                    .camera(
+                                        MapCamera(
+                                            centerCoordinate: predator.location,
+                                            distance: 1000
+                                        )
+                                    )
+                        )
                     }label:{
                         Map(position: $position){
                             Annotation(

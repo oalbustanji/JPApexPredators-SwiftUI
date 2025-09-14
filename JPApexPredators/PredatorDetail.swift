@@ -12,7 +12,7 @@ struct PredatorDetail: View {
     
     let predator : ApexPredator
     @State var position: MapCameraPosition
-    
+    @Namespace var nameSpace
     var body: some View {
         GeometryReader{ geo in
             ScrollView {
@@ -51,6 +51,7 @@ struct PredatorDetail: View {
                                         )
                                     )
                         )
+                        .navigationTransition(.zoom(sourceID: 1, in: nameSpace))
                     }label:{
                         Map(position: $position){
                             Annotation(
@@ -81,6 +82,7 @@ struct PredatorDetail: View {
                         .clipShape(.rect(cornerRadius: 15))
                         
                     }
+                    .matchedTransitionSource(id: 1, in: nameSpace)
                     Text("Appears in:").font(.title3)
                     ForEach(predator.movies, id: \.self){ movie in
                         Text("‧" + movie)
